@@ -1,24 +1,13 @@
-import pandas as pd
-from pathlib import Path
 
-data_path = Path("data/raw")
+import sqlite3
 
-csv_files = list(data_path.glob("*.csv"))
+conn = sqlite3.connect("bluestock_mf.db")
 
-print(f"Found {len(csv_files)} CSV files\n")
+with open("sql/schema.sql", "r") as f:
+    sql_script = f.read()
 
-for file in csv_files:
-    df = pd.read_csv(file)
-    print("Missing Values")
-    print(df.isnull().sum())
+conn.executescript(sql_script)
 
-    print("=" * 50)
-    print("File:", file.name)
-    print("Shape:", df.shape)
-    print("\nColumns:")
-    print(df.columns.tolist())
-    print("\nData Types:")
-    print(df.dtypes)
-    print("\nFirst 5 Rows:")
-    print(df.head())
-    print("\n")
+print("Tables created successfully!")
+
+conn.close()
