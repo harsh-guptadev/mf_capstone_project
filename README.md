@@ -58,11 +58,6 @@ Page 4 – SIP & Market Trends
 Page 5 – Executive Summary
 ## Dashboard Screenshots
 
-### Power BI Dashboard
-![Page1](reports/screenshort/page1_industry_overview.png)
-
-### Streamlit Dashboard
-![Streamlit](reports/screenshort/streamlit_dashboard_1.png)
 
 ## How to Run
 
