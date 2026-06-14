@@ -62,3 +62,46 @@ Page 5 – Executive Summary
 ```bash
 pip install -r requirements.txt
 python scripts/etl_pipeline.py
+
+## Bonus Challenge – Streamlit Web Application
+
+An interactive Streamlit dashboard was developed as an alternative to Power BI.
+
+Features:
+- Fund Overview
+- Top Performing Funds
+- Category Distribution
+- Alpha-Beta Analysis
+- Interactive Visualizations
+- Performance Dataset Explorer
+
+Run locally:
+
+python -m streamlit run streamlit_app.py
+## Bonus Challenge B2 - Streamlit Dashboard
+
+Interactive dashboard built using Streamlit for mutual fund analytics.
+
+Run:
+
+streamlit run streamlit_app.py
+
+## Bonus Challenge B5 - Automated HTML Report
+
+Generated an HTML report automatically from analytics outputs and visualizations.
+
+Output:
+reports/weekly_report.html
+## Bonus Challenge B1 – Automated NAV Fetching
+
+Implemented an automated NAV fetching system using MFAPI.
+
+Features:
+- Fetches latest NAV using AMFI codes
+- Stores results in CSV format
+- Records fetch timestamp
+- Can be scheduled using Windows Task Scheduler
+- Supports integration with ETL pipeline
+
+Output:
+data/raw/nav_updates/
