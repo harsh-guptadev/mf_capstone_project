@@ -16,8 +16,10 @@ col1, col2, col3 = st.columns(3)
 
 col1.metric("Total Funds", len(fund))
 
-if "aum" in aum.columns:
-    col2.metric("Total AUM", round(aum["aum"].sum(), 2))
+if "aum_crore" in aum.columns and "date" in aum.columns:
+    latest_date = aum["date"].max()
+    latest_aum = aum.loc[aum["date"] == latest_date, "aum_crore"].sum()
+    col2.metric(f"Total AUM (\u20B9 Cr, as of {latest_date})", f"{latest_aum:,.0f}")
 
 if "scheme_name" in fund.columns:
     col3.metric("Unique Schemes", fund["scheme_name"].nunique())
@@ -26,10 +28,10 @@ st.divider()
 
 st.header("Top Performing Funds")
 
-if "returns_1y" in performance.columns:
+if "return_1yr_pct" in performance.columns:
 
     top_funds = performance.sort_values(
-        by="returns_1y",
+        by="return_1yr_pct",
         ascending=False
     ).head(10)
 
@@ -38,8 +40,8 @@ if "returns_1y" in performance.columns:
     fig = px.bar(
         top_funds,
         x="scheme_name",
-        y="returns_1y",
-        title="Top 10 Funds by 1Y Return"
+        y="return_1yr_pct",
+        title="Top 10 Funds by 1Y Return (%)"
     )
 
     st.plotly_chart(fig, use_container_width=True)
@@ -62,7 +64,7 @@ if "category" in fund.columns:
 
 st.divider()
 
-st.header("Alpha Beta Analysis")
+st.header("Alpha vs Beta Analysis")
 
 if "alpha" in performance.columns and "beta" in performance.columns:
 

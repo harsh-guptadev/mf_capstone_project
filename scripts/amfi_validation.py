@@ -1,20 +1,26 @@
 import pandas as pd
 
-fund_master = pd.read_csv("data/raw/01_fund_master.csv")
-nav_history = pd.read_csv("data/raw/02_nav_history.csv")
+FUND_MASTER_FILE = "data/raw/01_fund_master.csv"
+NAV_HISTORY_FILE = "data/raw/02_nav_history.csv"
+def main():
+    fund_master = pd.read_csv(FUND_MASTER_FILE)
+    nav_history = pd.read_csv(NAV_HISTORY_FILE)
 
-fund_codes = set(fund_master["amfi_code"])
-nav_codes = set(nav_history["amfi_code"])
+    fund_codes = set(fund_master["amfi_code"])
+    nav_codes = set(nav_history["amfi_code"])
 
-missing_codes = fund_codes - nav_codes
+    missing_codes = fund_codes - nav_codes
 
-print("Fund Master Codes:", len(fund_codes))
-print("NAV History Codes:", len(nav_codes))
-print("Missing Codes:", len(missing_codes))
+    print(f"Fund Master Codes: {len(fund_codes)}")
+    print(f"NAV History Codes: {len(nav_codes)}")
+    print(f"Missing Codes:     {len(missing_codes)}")
 
-if len(missing_codes) == 0:
-    print("✅ All AMFI codes exist in NAV history")
-else:
-    print("❌ Missing Codes:")
-    print(missing_codes)
+    if not missing_codes:
+        print("All AMFI codes in fund master have matching NAV history.")
+    else:
+        print("Codes in fund master with no NAV history:")
+        print(sorted(missing_codes))
 
+
+if __name__ == "__main__":
+    main()
